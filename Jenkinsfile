@@ -2,7 +2,7 @@ pipeline {
    agent any
 
    environment {
-       NAME = $testp
+       NAME = "$testp"
 
    }
 
