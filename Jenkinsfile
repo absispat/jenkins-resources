@@ -14,6 +14,9 @@ pipeline {
             sh '''
                  echo "first line"
                  date
+                 ls
+                 cd jenkins
+                 ls
             '''
          }
       }
