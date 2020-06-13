@@ -1,6 +1,11 @@
 pipeline {
    agent any
 
+   environment {
+       NAME = $testp
+
+   }
+
    stages {
       stage('Hello') {
          steps {
@@ -18,16 +23,16 @@ pipeline {
                  cd jenkins
                  ls
 
-                 echo $testp
+                 echo $NAME
             '''
          }
       }
       stage('Deploy') {
          steps {
             sh '''
-                 echo $testp
-                 testp="hello"
-                 echo $testp
+                 echo $NAME
+                 NAME="hello"
+                 echo $NAME
                  ls
             '''
          }
@@ -35,7 +40,7 @@ pipeline {
       stage('Test') {
          steps {
             sh '''
-                 echo $testp
+                 echo $NAME
             '''
          }
       }
