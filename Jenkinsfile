@@ -17,8 +17,16 @@ pipeline {
                  ls
                  cd jenkins
                  ls
+                 testp="hello"
+                 echo $testp
             '''
          }
       }
+      stage('Deploy') {
+         steps {
+
+                 echo $testp
+            '''
+         }
    }
 }
