@@ -33,6 +33,7 @@ pipeline {
             sh '''
                  echo $NAME
                  NAME="hello"
+                 echo $NAME > env_start.txt
                  echo $NAME
                  ls
             '''
@@ -41,6 +42,7 @@ pipeline {
       stage('Test') {
          steps {
             sh '''
+                 NAME=`cat env_start.txt`
                  echo $NAME
                  echo "this is secret $secret"
             '''
