@@ -27,6 +27,7 @@ pipeline {
             sh '''
                  echo $testp
                  testp="hello"
+                 echo $testp
                  ls
             '''
          }
