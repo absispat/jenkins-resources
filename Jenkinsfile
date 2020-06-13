@@ -1,48 +1,22 @@
 pipeline {
    agent any
 
-   environment {
-       NAME = "$testp"
+   parameters {
+           string(name: 'custom_var', defaultValue: '')
+       }
 
-   }
 
    stages {
-      stage('Hello') {
-         steps {
-            echo 'Hello World'
-         }
+   stage("make param global") {
+           steps {
+             tmp_param =  sh (script: 'most amazing shell command', returnStdout: true).trim()
+             env.custom_var = tmp_param
+            }
       }
-      stage('Build') {
-         steps {
-            echo 'Hello Build'
-            sh 'echo "trying sh"'
-            sh '''
-                 echo "first line"
-                 date
-                 ls
-                 cd jenkins
-                 ls
-
-                 echo $NAME
-            '''
-         }
-      }
-      stage('Deploy') {
-         steps {
-            sh '''
-                 echo $NAME
-                 NAME="hello"
-                 echo $NAME
-                 ls
-            '''
-         }
-      }
-      stage('Test') {
-         steps {
-            sh '''
-                 echo $NAME
-            '''
-         }
+      stage("test if param was saved") {
+          steps {
+            echo "${env.custom_var}"
+          }
       }
    }
 }
